@@ -1,0 +1,16 @@
+FROM node:alpine
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN npm install
+
+# Copy the Prisma schema to the container
+COPY prisma ./prisma
+
+RUN npx prisma generate
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start:dev"]
